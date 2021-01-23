@@ -23,12 +23,12 @@
 						<td></td>
 						<td></td>
 						<td>
-							<span class="btn btn-warning btn-sm">
+							<span class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalActualizarContacto">
 								<span class="fas fa-edit"></span>
 							</span>
 						</td>
 						<td>
-							<span class="btn btn-danger btn-sm">
+							<span class="btn btn-danger btn-sm" onclick="eliminarContacto()">
 								<span class="far fa-trash-alt"></span>
 							</span>
 						</td>
