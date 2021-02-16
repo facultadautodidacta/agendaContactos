@@ -13,5 +13,14 @@
 			$respuesta = $query->execute();
 			return $respuesta;
 		}
+
+		public function eliminaCategoria($idCategoria) {
+			$conexion = Conexion::conectar();
+			$sql = "DELETE FROM t_categorias WHERE id_categoria = ?";
+			$query = $conexion->prepare($sql);
+			$query->bind_param('i', $idCategoria);
+			$respuesta = $query->execute();
+			return $respuesta;
+		}
 	}
  ?>
