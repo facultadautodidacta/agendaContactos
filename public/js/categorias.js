@@ -6,6 +6,9 @@ $(document).ready(function(){
 		agregarCategoria();
 	});
 
+	$('#btnActualizarCategoria').click(function(){
+		actualizarCategoria();
+	});
 });
 
 
@@ -52,5 +55,37 @@ function eliminarCategoria(idCategoria) {
 				}
 			});
 		} 
+	});
+}
+
+function obtenerDatosCategoria(idCategoria) {
+	$.ajax({
+		type:"POST",
+		data:"idCategoria=" + idCategoria,
+		url:"procesos/categorias/obtenerDatosCategoria.php",
+		success:function(respuesta) {
+			respuesta = jQuery.parseJSON(respuesta);
+
+			$('#idCategoria').val(respuesta['idCategoria']);
+			$('#nombreCategoriaU').val(respuesta['nombre']);
+			$('#descripcionU').val(respuesta['descripcion']);
+		}
+	});
+}
+
+function actualizarCategoria() {
+	$.ajax({
+		type:"POST",
+		data:$('#frmActualizarCategoria').serialize(),
+		url: "procesos/categorias/actualizarCategoria.php",
+		success:function(respuesta) {
+			respuesta = respuesta.trim();
+			if (respuesta == 1) {
+				$('#cargaTablaCategorias').load('vistas/categorias/tablaCategorias.php');
+				swal(":D","Se actualizo con exito!","success");
+			} else {
+				swal(":(","No se pudo actualizar!","error");
+			}
+		}
 	});
 }

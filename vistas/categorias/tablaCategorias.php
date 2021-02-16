@@ -31,7 +31,7 @@
 						<td><?php echo $mostrar['nombre'] ?></td>
 						<td><?php echo $mostrar['descripcion'] ?></td>
 						<td>
-							<span class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalActualizarCategoria">
+							<span onclick="obtenerDatosCategoria('<?php echo $idCategoria ?>')" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalActualizarCategoria">
 								<span class="fas fa-edit"></span>
 							</span>
 						</td>
