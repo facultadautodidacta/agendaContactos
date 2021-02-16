@@ -25,7 +25,7 @@ function agregarContacto(){
 	});
 }
 
-function eliminarContacto() {
+function eliminarContacto(idContacto) {
 	swal({
 		title: "¿Esta seguro de eliminar este contacto?",
 		text: "Una vez eliminado no podra ser recuperado!",
@@ -35,7 +35,20 @@ function eliminarContacto() {
 	})
 	.then((willDelete) => {
 		if (willDelete) {
-			swal("Se ha eliminado");
+			$.ajax({
+				type:"POST",
+				data:"idContacto=" + idContacto,
+				url:"procesos/contactos/eliminarContacto.php",
+				success:function(respuesta){
+					respuesta = respuesta.trim();
+					if (respuesta == 1) {
+						$('#cargaTablaContactos').load('vistas/contactos/tablaContactos.php');
+						swal(":D","Se elimino con exito!","success");
+					} else {
+						swal(":(","No se pudo eliminar!","error");
+					}
+				}
+			});
 		} 
 	});
 }
