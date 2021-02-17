@@ -71,3 +71,8 @@
 		$('#tablaContactosDT').DataTable();
 	});
 </script>
+
+
+$sqlUpdate = "UPDATE t_paciente
+						 SET id_medicoTitular = ? 
+					   WHERE id_paciente = ?";
