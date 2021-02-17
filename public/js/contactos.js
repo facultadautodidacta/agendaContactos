@@ -2,6 +2,15 @@ $(document).ready(function(){
 	$('#cargaTablaContactos').load('vistas/contactos/tablaContactos.php');
 
 	$('#btnAgregarContacto').click(function(){
+
+		if ($('#idCategoriaSelect').val() == 0) {
+			swal("Debes selecciona una categoria");
+			return false;
+		} else if ($('#nombre').val() == "") {
+			swal("Debes agregar el nombre");
+			return false;
+		}
+
 		agregarContacto();
 	});
 
@@ -38,6 +47,7 @@ function actualizarContacto() {
 			respuesta = respuesta.trim();
 			if (respuesta == 1) {
 				$('#cargaTablaContactos').load('vistas/contactos/tablaContactos.php');
+				$('#modalActualizarContacto').modal("toggle");
 				swal(":D","Se actualizo con exito!","success");
 			} else {
 				swal(":(","No se pudo actualizar!","error");
@@ -95,3 +105,5 @@ function obtenerDatosContacto(idContacto) {
 		}
 	});
 }
+
+

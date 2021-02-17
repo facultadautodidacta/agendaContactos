@@ -3,6 +3,12 @@ $(document).ready(function(){
 	$('#cargaTablaCategorias').load('vistas/categorias/tablaCategorias.php');
 	
 	$('#btnGuardarCategoria').click(function(){
+
+		if ($('#nombreCategoria').val() == "") {
+			swal("Debes agregar un nombre de categoria!");
+			return false;
+		}
+
 		agregarCategoria();
 	});
 
@@ -82,6 +88,7 @@ function actualizarCategoria() {
 			respuesta = respuesta.trim();
 			if (respuesta == 1) {
 				$('#cargaTablaCategorias').load('vistas/categorias/tablaCategorias.php');
+				$('#modalActualizarCategoria').modal("toggle");
 				swal(":D","Se actualizo con exito!","success");
 			} else {
 				swal(":(","No se pudo actualizar!","error");
