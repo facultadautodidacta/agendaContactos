@@ -49,7 +49,7 @@
 						<td><?php echo $mostrar['email'] ?></td>
 						<td><?php echo $mostrar['categoria'] ?></td>
 						<td>
-							<span class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalActualizarContacto">
+							<span class="btn btn-warning btn-sm" onclick="obtenerDatosContacto('<?php echo $idContacto ?>')" data-toggle="modal" data-target="#modalActualizarContacto">
 								<span class="fas fa-edit"></span>
 							</span>
 						</td>
@@ -71,8 +71,3 @@
 		$('#tablaContactosDT').DataTable();
 	});
 </script>
-
-
-$sqlUpdate = "UPDATE t_paciente
-						 SET id_medicoTitular = ? 
-					   WHERE id_paciente = ?";

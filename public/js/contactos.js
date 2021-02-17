@@ -4,6 +4,10 @@ $(document).ready(function(){
 	$('#btnAgregarContacto').click(function(){
 		agregarContacto();
 	});
+
+	$('#btnActualizarContacto').click(function(){
+		actualizarContacto();
+	});
 });
 
 
@@ -24,6 +28,24 @@ function agregarContacto(){
 		}
 	});
 }
+
+function actualizarContacto() {
+	$.ajax({
+		type: "POST",
+		url: "procesos/contactos/actualizarContacto.php",
+		data: $('#frmAgregarContactoU').serialize(),
+		success:function(respuesta) {
+			respuesta = respuesta.trim();
+			if (respuesta == 1) {
+				$('#cargaTablaContactos').load('vistas/contactos/tablaContactos.php');
+				swal(":D","Se actualizo con exito!","success");
+			} else {
+				swal(":(","No se pudo actualizar!","error");
+			}
+		}
+	});
+}
+
 
 function eliminarContacto(idContacto) {
 	swal({
@@ -50,5 +72,26 @@ function eliminarContacto(idContacto) {
 				}
 			});
 		} 
+	});
+}
+
+function obtenerDatosContacto(idContacto) {
+	$.ajax({
+		type: "POST",
+		data: "idContacto=" + idContacto,
+		url: "procesos/contactos/obtenerDatosContacto.php",
+		success:function(respuesta) {
+			respuesta = jQuery.parseJSON(respuesta);
+			idCategoria = respuesta['id_categoria'];
+
+			$('#nombreU').val(respuesta['nombre']);
+			$('#apaternoU').val(respuesta['paterno']);
+			$('#amaternoU').val(respuesta['materno']);
+			$('#telefonoU').val(respuesta['telefono']);
+			$('#emailU').val(respuesta['email']);
+			$('#idContactoU').val(respuesta['id_contacto']);
+			$('#categoriasIdU').load("vistas/contactos/selectCategoriasUpdate.php?idCategoria=" + idCategoria);
+			
+		}
 	});
 }
